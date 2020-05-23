@@ -1,0 +1,24 @@
+language: generic
+sudo: required
+services:
+  - docker
+
+before_install:
+  - docker build -t enzobarrett/react-test -f ./client/Dockerfile.dev ./client
+
+script:
+  - docker run -e CI=true enzobarrett/react-test npm test
+
+after_success:
+  - docker build -t enzobarrett/multi-client ./client
+  - docker build -t enzobarrett/multi-nginx ./nginx
+  - docker build -t enzobarrett/multi-server ./server
+  - docker build -t enzobarrett/multi-worker ./worker
+  # Login to docker
+  - echo "$DOCKER_PASS" | docker login -u "$DOCKER_USER" --password-stdin
+  # Push images to docker hub
+  - docker push enzobarrett/multi-client
+  - docker push eenzobarrett/multi-nginx 
+  - docker push eenzobarrett/multi-server
+  - docker push eenzobarrett/multi-worker
+
