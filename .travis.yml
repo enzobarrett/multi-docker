@@ -15,7 +15,7 @@ after_success:
   - docker build -t enzobarrett/multi-server ./server
   - docker build -t enzobarrett/multi-worker ./worker
   # Login to docker
-  - echo "$DOCKER_PASS" | docker login -u "$DOCKER_USER" --password-stdin
+  - echo "$DOCKER_PASS" | docker login -u "$DOCKER_USER" --password-stdin docker.io
   # Push images to docker hub
   - docker push enzobarrett/multi-client
   - docker push enzobarrett/multi-nginx 
