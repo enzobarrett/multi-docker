@@ -18,7 +18,7 @@ after_success:
   - echo "$DOCKER_PASS" | docker login -u "$DOCKER_USER" --password-stdin
   # Push images to docker hub
   - docker push enzobarrett/multi-client
-  - docker push eenzobarrett/multi-nginx 
-  - docker push eenzobarrett/multi-server
-  - docker push eenzobarrett/multi-worker
+  - docker push enzobarrett/multi-nginx 
+  - docker push enzobarrett/multi-server
+  - docker push enzobarrett/multi-worker
 
